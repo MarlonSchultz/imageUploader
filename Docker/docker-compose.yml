@@ -20,7 +20,7 @@ services:
           - ../Code/PHP:/var/www/imageUploader
 
   image_uploader_mysql:
-      image: mysql:latest
+      image: mysql
       environment:
         MYSQL_ROOT_PASSWORD: toor
         MYSQL_USER: imageUploader

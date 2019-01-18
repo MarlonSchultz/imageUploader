@@ -4,3 +4,4 @@
 !/Code/PHP/var/cache/.gitkeep
 Code/PHP/vendor/
 MysqlData
+.idea/*
