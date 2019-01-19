@@ -19,16 +19,11 @@ services:
       volumes:
           - ../Code/PHP:/var/www/imageUploader
 
-  image_uploader_mysql:
-      image: mysql
+  image_uploader_postgres:
+      image: postgres
       environment:
-        MYSQL_ROOT_PASSWORD: toor
-        MYSQL_USER: imageUploader
-        MYSQL_PASSWORD: imageUploader
-        MYSQL_DATABASE: imageUploader
-      ports:
-      - "3308:3306"
+        POSTGRES_PASSWORD: imageUploader
       restart: always
       volumes:
-      - ../MysqlData:/var/lib/mysql
+        - ./postgres-data:/var/lib/postgresql/data
 
