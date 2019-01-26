@@ -23,6 +23,7 @@ services:
 
   image_uploader_postgres:
       image: postgres
+      container_name: postgressor
       environment:
         POSTGRES_USER: Imaginer
         POSTGRES_PASSWORD: imageUploader

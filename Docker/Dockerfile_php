@@ -7,17 +7,20 @@ git \
 unzip \
 libpng-dev \
 wget \
-mysql-client \
 libjpeg62-turbo-dev \
 libfreetype6-dev \
 libzip-dev \
-libsodium-dev
+libsodium-dev \
+libpq-dev \
+vim \
+mc
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN echo "Europe/Berlin" > /etc/timezone
 RUN dpkg-reconfigure -f noninteractive tzdata
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include
-RUN docker-php-ext-install pdo pdo_mysql mysqli pcntl opcache gd zip calendar sodium
+RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql
+RUN docker-php-ext-install pdo pcntl opcache gd zip calendar sodium pgsql pdo_pgsql session
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN usermod -u 1000 www-data
