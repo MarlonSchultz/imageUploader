@@ -12,29 +12,30 @@ services:
       - image_uploader_php
 
   image_uploader_php:
-      build:
-        context: .
-        dockerfile: Dockerfile_php
-      environment:
-          PHP_IDE_CONFIG: "serverName=jeophpardy.local"
-      volumes:
-          - ../Code/PHP:/var/www/imageUploader
-      working_dir: /var/www/imageUploader
+    build:
+      context: .
+      dockerfile: Dockerfile_php
+    environment:
+      PHP_IDE_CONFIG: "serverName=jeophpardy.local"
+    volumes:
+      - ../Code/PHP:/var/www/imageUploader
+    working_dir: /var/www/imageUploader
 
-  image_uploader_postgres:
-      image: postgres
-      container_name: postgressor
-      environment:
-        POSTGRES_USER: Imaginer
-        POSTGRES_PASSWORD: imageUploader
-        POSTGRES_DB: imageUploader
-      volumes:
-        - ../postgres-data:/var/lib/postgresql/data
-      ports:
-        - 5432:5432
+  image_uploader_db:
+    image: mysql:5.7.25
+    container_name: imageUploaderDb
+    environment:
+      MYSQL_ROOT_PASSWORD: LosRootos
+      MYSQL_USER: Imaginer
+      MYSQL_PASSWORD: ImageUploader
+      MYSQL_DATABASE: ImageUploader
+    ports:
+      - 3306:3306
+    volumes:
+      - ../mysql-data:/var/lib/mysql
 
   adminer:
-     image: adminer 
-     restart: always
-     ports:
+    image: adminer
+    restart: always
+    ports:
       - 8080:8080

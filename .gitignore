@@ -3,5 +3,5 @@
 !/Code/PHP/var/log/.gitkeep
 !/Code/PHP/var/cache/.gitkeep
 Code/PHP/vendor/
-postgres-data
 .idea/*
+mysql-data
