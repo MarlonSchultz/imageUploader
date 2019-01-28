@@ -5,7 +5,8 @@ services:
 
 build:
     script:
-        - apk add --no-cache py-pip      # <--
-        - pip install docker-compose     # <--
+        - apk add --no-cache py-pip
+        - pip install docker-compose
         - docker-compose -f Docker/docker-compose.yml up -d
+        - docker exec php php composer install
         - docker exec php php bin/console
