@@ -2,7 +2,6 @@ image: docker
 services:
     - docker:dind
 build:
-    stage: build
     script:
         - apk add --no-cache py-pip
         - pip install docker-compose
