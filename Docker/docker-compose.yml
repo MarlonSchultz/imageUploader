@@ -17,7 +17,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile_php
-      target: prod
+      target: xdebug
     env_file:
       - mysql_env
     volumes:
