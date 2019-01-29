@@ -1,7 +1,6 @@
 FROM php:7.3.1-fpm
 
 RUN apt-get update
-
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install -y apt-utils \
 git \
 unzip \
@@ -12,8 +11,8 @@ libfreetype6-dev \
 libzip-dev \
 libsodium-dev \
 mysql-client \
-vim \
-mc
+vim
+
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN echo "Europe/Berlin" > /etc/timezone
@@ -27,3 +26,4 @@ RUN groupmod -g 1000 www-data
 
 USER www-data:www-data
 WORKDIR /var/www/imageUploader
+

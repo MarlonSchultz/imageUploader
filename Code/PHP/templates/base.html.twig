@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>{% block title %}ImageUploader{% endblock %}</title>
     {% block stylesheets %}
-        <link href="{{ asset('css/materialize.css') }}" rel="stylesheet"/>
+        <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet"/>
     {% endblock %}
 </head>
 
@@ -14,9 +14,8 @@
     <div class="nav-wrapper">
         <a href="#" class="brand-logo">Logo</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="sass.html">Sass</a></li>
-            <li><a href="badges.html">Components</a></li>
-            <li><a href="collapsible.html">JavaScript</a></li>
+            <li><a href="{{ path('uploader_new') }}">Bild heraufladen</a></li>
+            <li><a href="#">Profile</a></li>
         </ul>
     </div>
 </nav>
