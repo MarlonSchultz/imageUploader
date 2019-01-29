@@ -8,18 +8,33 @@
     {% endblock %}
 </head>
 
-<body>
+<body class="bg-dark">
+<div class="container-fluid bg-dark">
+    <div class="row">
+        <div class="col-sm">
+            <ul class="nav flex-column navbar-dark bg-dark">
+                <li class="nav-item">
+                    <a href="{{ path('uploader_new') }}">Bild heraufladen</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Item 2</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Item 3</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Item 4</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-11">
+            {% block body %}{% endblock %}
 
-<nav>
-    <div class="nav-wrapper">
-        <a href="#" class="brand-logo">Logo</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="{{ path('uploader_new') }}">Bild heraufladen</a></li>
-            <li><a href="#">Profile</a></li>
-        </ul>
+        </div>
     </div>
-</nav>
-{% block body %}{% endblock %}
+</div>
+
+
 {% block javascripts %}{% endblock %}
 </body>
 </html>
