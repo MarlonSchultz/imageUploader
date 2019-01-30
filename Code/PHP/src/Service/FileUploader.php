@@ -1,26 +1,48 @@
 <?php
+
 namespace App\Service;
 
+use App\Entity\UploadedImages;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\Exception\UploadException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileUploader
 {
     private $targetDirectory;
+    /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
 
-    public function __construct($targetDirectory)
+    /**
+     * FileUploader constructor.
+     * @param $targetDirectory
+     * @param EntityManagerInterface $entityManager
+     */
+    public function __construct($targetDirectory, EntityManagerInterface $entityManager)
     {
         $this->targetDirectory = $targetDirectory;
+        $this->entityManager = $entityManager;
     }
 
-    public function upload(UploadedFile $file): string
+    public function uploadAndPersistToDb(UploadedFile $file): string
     {
-        $fileName = md5(uniqid('', true)).'.'.$file->guessExtension();
+        if (!$file->isValid()) {
+            throw new UploadException('File not valid');
+        }
+
+        $fileName = md5(uniqid('', true)) . '.' . $file->guessExtension();
 
         try {
             $file->move($this->getTargetDirectory(), $fileName);
+            $newImage = new UploadedImages();
+            $newImage->setFileName($fileName);
+            $this->entityManager->persist($newImage);
+            $this->entityManager->flush();
         } catch (FileException $e) {
-            // ... handle exception if something happens during file upload
+            throw new UploadException('Moving file failed.');
         }
 
         return $fileName;

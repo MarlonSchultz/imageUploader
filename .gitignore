@@ -3,5 +3,7 @@
 !/Code/PHP/var/log/.gitkeep
 !/Code/PHP/var/cache/.gitkeep
 Code/PHP/vendor/
+Code/PHP/uploadedImages/*
+!Code/PHP/uploadedImages/.gitkeep
 .idea/*
 mysql-data
