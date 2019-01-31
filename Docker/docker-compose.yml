@@ -23,6 +23,8 @@ services:
         volumes:
             - ../Code/PHP:/var/www/imageUploader
         working_dir: /var/www/imageUploader
+        extra_hosts:
+            - "localhost:127.0.0.1"
 
     image_uploader_db:
         image: mysql:5.7.25

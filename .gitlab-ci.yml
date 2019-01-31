@@ -7,4 +7,4 @@ build:
         - pip install docker-compose
         - docker-compose -f Docker/docker-compose.yml up -d
         - docker exec php composer install
-        - docker exec php php bin/phpunit
+        - docker exec php php bin/phpunit -c /var/www/imageUploader/phpunit.xml.dist --coverage-text

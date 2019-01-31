@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Entity\Images;
 use App\Form\ImageUploaderType;
 use App\Service\FileUploader;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -70,7 +71,7 @@ class ImageUploadController
     }
 
     /**
-     * @Route("/xhrUpload", name="xhr_upload")
+     * @Route("/xhrUpload", name="xhr_upload", methods={"POST"})
      * @param Request $request
      * @return Response
      */
