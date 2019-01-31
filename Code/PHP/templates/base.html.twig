@@ -5,6 +5,7 @@
     <title>{% block title %}ImageUploader{% endblock %}</title>
     {% block stylesheets %}
         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet"/>
+        <link href="{{ asset('css/all.css') }}" rel="stylesheet"/>
     {% endblock %}
 </head>
 
@@ -34,7 +35,7 @@
             {% if app.user %}
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a href="{{ path('uploader_new') }}">Bild heraufladen</a>
+                        <a href="{{ path('dropzone_upload') }}">Bild heraufladen</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Item 2</a>
