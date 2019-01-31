@@ -34,8 +34,6 @@ FROM base as xdebug
 
     RUN apt-get clean
     RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-    RUN usermod -u 1000 www-data
-    RUN groupmod -g 1000 www-data
     USER www-data:www-data
     WORKDIR /var/www/imageUploader
 
@@ -43,7 +41,5 @@ FROM base as prod
 
     RUN apt-get clean
     RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-    RUN usermod -u 1000 www-data
-    RUN groupmod -g 1000 www-data
     USER www-data:www-data
     WORKDIR /var/www/imageUploader
