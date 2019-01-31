@@ -9,6 +9,7 @@ use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -43,11 +44,11 @@ class ImageUploadController
     }
 
     /**
-     * @Route("/createNewImage", name="uploader_new")
+     * @Route("/manualUpload", name="manual_upload")
      * @param Request $request
      * @return Response
      */
-    public function createNewImage(Request $request): Response
+    public function manualUpload(Request $request): Response
     {
         $form = $this->formFactory->create(ImageUploaderType::class);
         $form->handleRequest($request);
@@ -55,6 +56,26 @@ class ImageUploadController
             $file = $form['image']->getData();
             $this->fileUploader->uploadAndPersistToDb($file);
         }
-        return $this->twigEngine->renderResponse('imageUploader/newUpload.html.twig', ['form' => $form->createView()]);
+        return $this->twigEngine->renderResponse('imageUploader/manualUpload.html.twig', ['form' => $form->createView()]);
+    }
+
+    /**
+     * @Route("/dropzoneUpload", name="dropzone_upload")
+     * @param Request $request
+     * @return Response
+     */
+    public function dropzoneUpload(Request $request): Response
+    {
+        return $this->twigEngine->renderResponse('imageUploader/dropzoneUpload.html.twig');
+    }
+
+    /**
+     * @Route("/xhrUpload", name="xhr_upload")
+     * @param Request $request
+     * @return Response
+     */
+    public function xhrUpload(Request $request): JsonResponse
+    {
+        return new JsonResponse(['failed' => true]);
     }
 }
