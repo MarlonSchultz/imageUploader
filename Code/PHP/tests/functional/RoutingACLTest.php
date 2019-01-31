@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests;
+namespace App\Tests\Functional;
 
 use App\Entity\User;
 use App\Security\LoginFormAuthenticator;
@@ -11,6 +11,13 @@ use Symfony\Component\Security\Guard\Token\PostAuthenticationGuardToken;
 
 class RoutingACLTest extends WebTestCase
 {
+
+    public function testIfLoginIsReachableAsAnon()
+    {
+        $client = static::createClient();
+        $client->request('GET','/login');
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+    }
     /**
      * @dataProvider urlsThatNeedAValidLogin
      * @param $url
