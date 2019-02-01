@@ -78,11 +78,11 @@ class ImageUploadController
      */
     public function xhrUpload(Request $request): JsonResponse
     {
-        try {
-            $this->fileUploader->uploadAndPersistToDb($request->files->get('uploadedFile'));
-        } catch (UploadException $exception) {
-            return new JsonResponse(['uploaded' => false, 'errorMsg' => $exception->getMessage()], 400);
+        if (!$this->fileUploader->checkIfUploadIsValid($request, 'uploadedFile')) {
+            return new JsonResponse(['uploaded' => false], 200);
         }
+
+        $this->fileUploader->uploadAndPersistToDb($request->files->get('uploadedFile'));
         return new JsonResponse(['uploaded' => true], 200);
     }
 }

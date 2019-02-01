@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\Exception\UploadException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\Request;
 
 class FileUploader
 {
@@ -27,6 +28,17 @@ class FileUploader
         $this->entityManager = $entityManager;
     }
 
+    public function checkIfUploadIsValid(Request $request, string $uploadName): bool
+    {
+        /** @var UploadedFile $file */
+        $file = $request->files->get($uploadName);
+        if (null === $file) {
+            return false;
+        }
+        
+        return $file->isValid();
+    }
+
     public function uploadAndPersistToDb(UploadedFile $file): string
     {
         if (!$file->isValid()) {
@@ -42,7 +54,7 @@ class FileUploader
             $this->entityManager->persist($newImage);
             $this->entityManager->flush();
         } catch (FileException $e) {
-            throw new UploadException('Moving file failed:'. $e->getMessage());
+            throw new UploadException('Moving file failed:' . $e->getMessage());
         }
 
         return $fileName;
