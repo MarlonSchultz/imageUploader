@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\File\Exception\UploadException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -77,6 +78,11 @@ class ImageUploadController
      */
     public function xhrUpload(Request $request): JsonResponse
     {
-        return new JsonResponse(['failed' => true]);
+        try {
+            $this->fileUploader->uploadAndPersistToDb($request->files->get('uploadedFile'));
+        } catch (UploadException $exception) {
+            return new JsonResponse(['uploaded' => false, 'errorMsg' => $exception->getMessage()], 400);
+        }
+        return new JsonResponse(['uploaded' => true], 200);
     }
 }

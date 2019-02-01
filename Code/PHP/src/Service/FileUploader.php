@@ -42,7 +42,7 @@ class FileUploader
             $this->entityManager->persist($newImage);
             $this->entityManager->flush();
         } catch (FileException $e) {
-            throw new UploadException('Moving file failed.');
+            throw new UploadException('Moving file failed:'. $e->getMessage());
         }
 
         return $fileName;
