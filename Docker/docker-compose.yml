@@ -22,6 +22,7 @@ services:
             - mysql_env
         volumes:
             - ../Code/PHP:/var/www/imageUploader
+            - ./containerScripts/php-fpm:/var/www/imageUploader/containerScripts
         working_dir: /var/www/imageUploader
         extra_hosts:
             - "localhost:127.0.0.1"
@@ -38,6 +39,5 @@ services:
 
     adminer:
         image: adminer
-        restart: always
         ports:
             - 8080:8080

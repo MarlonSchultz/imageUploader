@@ -1,6 +1,6 @@
-# image uploader using tesseract
+# image uploader
 
-## known issues
+- Build with docker-compose
+- Docker exec into php container run composer install
 
-If you cannot login with your postgres user, delete postgres folder and restart containers.
-The user role is being instantiated when the folder is created
+
