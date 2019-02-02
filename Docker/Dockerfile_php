@@ -34,7 +34,6 @@ FROM base as xdebug
 
     RUN apt-get clean
     RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-    RUN chmod +x  /var/www/imageUploader/cliXDebug.sh
     USER www-data:www-data
     WORKDIR /var/www/imageUploader
 
