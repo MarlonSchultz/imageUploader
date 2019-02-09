@@ -26,10 +26,16 @@ class FileUploaderTest extends TestCase
 
     public function testIfFileValidityCheckerWorks()
     {
-        $request = new Request();
-        // we just take the test as an file to upload
-        $request->files->set('someFile', new UploadedFile(__DIR__ . DIRECTORY_SEPARATOR . 'FileUploaderTest.php', 'fileName'));
-        self::assertTrue($this->fileUploader->checkIfUploadIsValid($request, 'fileName'));
+        // last option "test" is to circumvent check if something REALLY has been uploaded
+        $file = new UploadedFile(
+            __DIR__.'/Fixtures/10-kernel-view.png',
+            '10-kernel-view.png',
+            'image/png',
+            null,
+            true
+        );
+
+        self::assertTrue($this->fileUploader->checkIfUploadIsValid($file));
     }
 
     public function setUp(): void

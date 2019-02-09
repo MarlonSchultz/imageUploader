@@ -28,14 +28,8 @@ class FileUploader
         $this->entityManager = $entityManager;
     }
 
-    public function checkIfUploadIsValid(Request $request, string $uploadName): bool
+    public function checkIfUploadIsValid(UploadedFile $file): bool
     {
-        /** @var UploadedFile $file */
-        $file = $request->files->get($uploadName);
-        if (null === $file) {
-            return false;
-        }
-        
         return $file->isValid();
     }
 

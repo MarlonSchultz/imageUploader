@@ -74,11 +74,15 @@ class ImageUploadController
     /**
      * @Route("/xhrUpload", name="xhr_upload", methods={"POST"})
      * @param Request $request
-     * @return Response
+     * @return JsonResponse
      */
     public function xhrUpload(Request $request): JsonResponse
     {
-        if (!$this->fileUploader->checkIfUploadIsValid($request, 'uploadedFile')) {
+        if (($file = $request->files->get('uploadedFile')) === null) {
+            return new JsonResponse(['uploaded' => false], 200);
+        }
+
+        if ($this->fileUploader->checkIfUploadIsValid($file)) {
             return new JsonResponse(['uploaded' => false], 200);
         }
 

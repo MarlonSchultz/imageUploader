@@ -34,12 +34,10 @@ FROM base as xdebug
 
     RUN apt-get clean
     RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-    USER www-data:www-data
     WORKDIR /var/www/imageUploader
 
 FROM base as prod
 
     RUN apt-get clean
     RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-    USER www-data:www-data
     WORKDIR /var/www/imageUploader
