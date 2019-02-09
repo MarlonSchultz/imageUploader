@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+    {% block stylesheets %}
+        {{ parent() }}
+        <link href="{{ asset('css/dropzone.css') }}" rel="stylesheet"/>
+    {% endblock %}
+{% block title %}Upload picture!{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+{% endblock %}

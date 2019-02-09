@@ -1,43 +1,43 @@
 version: "3.5"
 services:
-  image_uploader_nginx:
-    image: nginx:latest
-    container_name: nginx
-    volumes:
-      - ../Code/PHP:/var/www/imageUploader
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf
-    working_dir: /var/www/imageUploader
-    ports:
-      - 80:80
-    links:
-      - image_uploader_php
+    image_uploader_nginx:
+        image: nginx:latest
+        container_name: nginx
+        volumes:
+            - ../Code/PHP:/var/www/imageUploader
+            - ./nginx.conf:/etc/nginx/conf.d/default.conf
+        working_dir: /var/www/imageUploader
+        ports:
+            - 80:80
+        links:
+            - image_uploader_php
 
-  image_uploader_php:
-    container_name: php
-    build:
-      context: .
-      dockerfile: Dockerfile_php
-      target: xdebug
-    env_file:
-      - mysql_env
-    volumes:
-      - ../Code/PHP:/var/www/imageUploader
-    working_dir: /var/www/imageUploader
-    extra_hosts:
-       - "localhost:127.0.0.1"
+    image_uploader_php:
+        container_name: php
+        build:
+            context: .
+            dockerfile: Dockerfile_php
+            target: xdebug
+        env_file:
+            - mysql_env
+        volumes:
+            - ../Code/PHP:/var/www/imageUploader
+            - ./containerScripts/php-fpm:/var/www/imageUploader/containerScripts
+        working_dir: /var/www/imageUploader
+        extra_hosts:
+            - "localhost:127.0.0.1"
 
-  image_uploader_db:
-    image: mysql:5.7.25
-    container_name: ImageUploaderDb
-    env_file:
-      - mysql_env
-    ports:
-      - 3306:3306
-    volumes:
-      - ../mysql-data:/var/lib/mysql
+    image_uploader_db:
+        image: mysql:5.7.25
+        container_name: ImageUploaderDb
+        env_file:
+            - mysql_env
+        ports:
+            - 3306:3306
+        volumes:
+            - ../mysql-data:/var/lib/mysql
 
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8080:8080
+    adminer:
+        image: adminer
+        ports:
+            - 8080:8080
