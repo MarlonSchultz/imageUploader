@@ -1,9 +1,3 @@
-/Code/PHP/var/cache/*
-/Code/PHP/var/log/*
-!/Code/PHP/var/log/.gitkeep
-!/Code/PHP/var/cache/.gitkeep
-Code/PHP/vendor/
-Code/PHP/uploadedImages/*
-!Code/PHP/uploadedImages/.gitkeep
-.idea/*
-mysql-data
+.idea/
+/Code/Elm/elm-stuff
+/Code/Elm/node_modules/
