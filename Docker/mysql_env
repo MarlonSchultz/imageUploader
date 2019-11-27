@@ -1,5 +1,0 @@
-MYSQL_ROOT_PASSWORD=LosRootos
-MYSQL_USER=Imaginer
-MYSQL_PASSWORD=ImageUploader
-MYSQL_DATABASE=ImageUploader
-MYSQL_HOST=ImageUploaderDb
